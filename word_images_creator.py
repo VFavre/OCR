@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 # 255 = white and 0 = black)
 
 backgound_noise = 215
-
+#----------------------------------------------------------------------------------------------------------------
 #change the next variable to change the amount of black noise (from 0 to 1 correspond to a % of the amount of
 # pixel in the image that will be noise )
 
@@ -13,10 +13,21 @@ text_noise = 0.1
 
 
 
+#New you enter the code part
+#----------------------------------------------------------------------------------------------------------------
+
+# get the 1000 most written english words
+f = open('1-1000.txt', 'r')
+word_list = f.read().splitlines()
+f.close()
+for i in range (0,10):
+    word_list.append(str(i))
+
+word_number = random.randint(0, 1010)
 
 
 #create text tilted at between 7 and -7 degre
-label = 'Hellq!' 
+label = word_list[word_number] 
 font = ImageFont.truetype('C:\Windows\Fonts\Calibri.ttf', 36)
 line_height = sum(font.getmetrics())
 fontimage = Image.new('L', (font.getsize(label)[0], line_height))
