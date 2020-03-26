@@ -8,20 +8,31 @@ font = ImageFont.truetype('C:\Windows\Fonts\Calibri.ttf', 36)
 line_height = sum(font.getmetrics())
 fontimage = Image.new('L', (font.getsize(label)[0], line_height))
 ImageDraw.Draw(fontimage).text((0, 0), label, fill=255, font=font)
-fontimage = fontimage.rotate(7, resample=Image.BICUBIC, expand=True)
+fontimage = fontimage.rotate(random.uniform(-7, 7), resample=Image.BICUBIC, expand=True)
+
 
 final = Image.new('L',(fontimage.size[0],fontimage.size[1]), color = 'white')
+
+pixels = final.load()
+length = fontimage.size[1]
+height = fontimage.size[0]
+
+
+for i in range(height):
+    for j in range(length):
+        pixels[i,j] = random.randint(215, 255)
+        
+
 final.paste("black", box=(0, 0), mask=fontimage)
 
 
 # add noise to the text
-length = fontimage.size[1]
-height = fontimage.size[0]
 
 number_of_pixels = length * height
 pixels = final.load()
 
-noise_factor = int(0.3*(number_of_pixels))
+
+noise_factor = int(0.1*(number_of_pixels))
 
 for i in range(noise_factor):
     x= int(random.uniform(0, height))
