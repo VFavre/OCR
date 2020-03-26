@@ -1,8 +1,21 @@
 import random
 from PIL import Image, ImageDraw, ImageFont
 
-#create text tilted at 7 degre
+#change the value of the next variable to cgange the maximum value of the backgroudn noise (from 0 to 255 with 
+# 255 = white and 0 = black)
 
+backgound_noise = 215
+
+#change the next variable to change the amount of black noise (from 0 to 1 correspond to a % of the amount of
+# pixel in the image that will be noise )
+
+text_noise = 0.1
+
+
+
+
+
+#create text tilted at between 7 and -7 degre
 label = 'Hellq!' 
 font = ImageFont.truetype('C:\Windows\Fonts\Calibri.ttf', 36)
 line_height = sum(font.getmetrics())
@@ -20,7 +33,7 @@ height = fontimage.size[0]
 
 for i in range(height):
     for j in range(length):
-        pixels[i,j] = random.randint(215, 255)
+        pixels[i,j] = random.randint(backgound_noise, 255)
         
 
 final.paste("black", box=(0, 0), mask=fontimage)
@@ -32,7 +45,7 @@ number_of_pixels = length * height
 pixels = final.load()
 
 
-noise_factor = int(0.1*(number_of_pixels))
+noise_factor = int(text_noise*(number_of_pixels))
 
 for i in range(noise_factor):
     x= int(random.uniform(0, height))
